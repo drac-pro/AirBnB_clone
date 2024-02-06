@@ -16,9 +16,7 @@ These steps include:
 This will be a simple console in python which will help us to manipulate a powerful storage system. This storage engine will give us an abstraction between “My object” and “How they are stored and persisted”.This means: from your console code (the command interpreter itself) and from the front-end and RestAPI you will build later, you won’t have to pay attention (take care) of how your objects are stored.
 
 - how to start the console `$ ./console.py`
-- how to use the console
-	* Interactive mode and non-interactive mode
-* interavive mode 
+- how to use the console in interavive mode 
 ```
 $ ./console.py 
 (hbnb) help
@@ -30,5 +28,27 @@ EOF  help  quit
 (hbnb) 
 (hbnb) 
 (hbnb) quit
+$
+```
+- how to use the console in non-interavive mode
+```
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
 $
 ```
