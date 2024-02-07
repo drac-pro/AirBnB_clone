@@ -1,4 +1,5 @@
 test_save_reload_base_model.py
 file.json
 models/engine/__pycache__
+*.swp
 .gitignore
