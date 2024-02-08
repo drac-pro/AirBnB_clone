@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import json
 from models.base_model import BaseModel
+import json
 """Defines a file storage class that serializes instances to a JSON file
 and deserializes a JSON file to instances"""
 
@@ -39,7 +39,7 @@ class FileStorage:
                 for key, value in objects_dict.items():
                     cls = value["__class__"]
                     del value["__class__"]
-                    FileStorage.__objects[key] = getattr(models, cls)(**value)
+                    FileStorage.__objects[key] = BaseModel(**value)
 
         except FileNotFoundError:
             pass
