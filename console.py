@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import cmd
+from models import storage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -12,7 +13,7 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """Defines the the HBNBCommand command interpreter"""
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
     className = {"BaseModel": BaseModel, "User": User, "State": State,
                  "City": City, "Amenity": Amenity, "Place": Place,
                  "Review": Review}
@@ -33,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
         elif args not in HBNBCommand.className.keys():
             print("** class doesn't exist **")
         else:
-            obj = HBNBCommand.className["args"]()
+            obj = HBNBCommand.className[args]()
             obj.save()
             print(obj.id)
 
@@ -119,12 +120,13 @@ updating attribute (save the change into the JSON file)""")
                     try:
                         value = eval(argsList[3])
                         if type(value) in (str, int, float):
-                            setattr(obj, args[2], value)
+                            setattr(obj, argsList[2], value)
                             storage.save()
                     except Exception:
                         return
 
-    def do_emptyline(self):
+    def emptyline(self):
+        """Go to next line and print prompt when enter pressed"""
         pass
 
 
