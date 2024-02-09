@@ -121,8 +121,8 @@ updating attribute (save the change into the JSON file)""")
                         if type(value) in (str, int, float):
                             setattr(obj, args[2], value)
                             storage.save()
-                    except:
-                        pass
+                    except Exception:
+                        return
 
     def do_emptyline(self):
         pass
