@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
     """Defines the the HBNBCommand command interpreter"""
     prompt = "(hbnb)"
     className = {"BaseModel": BaseModel, "User": User, "State": State,
-                 "City": City, "Amenity": Amenity, "Place": place,
+                 "City": City, "Amenity": Amenity, "Place": Place,
                  "Review": Review}
 
     def do_quit(self, args):
