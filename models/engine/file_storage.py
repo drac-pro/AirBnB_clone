@@ -33,7 +33,6 @@ class FileStorage:
         objects_dict = {}
         for key, value in FileStorage.__objects.items():
             objects_dict[key] = value.to_dict()
-
         with open(FileStorage.__file_path, 'w', encoding="utf-8") as f:
             json.dump(objects_dict, f)
 
