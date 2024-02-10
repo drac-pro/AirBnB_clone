@@ -136,7 +136,7 @@ updating attribute (save the change into the JSON file)""")
                 count = sum(
                         1 for obj in all_objs.values()
                         if obj.__class__.__name__ == argsList[0])
-            print(count)
+                print(count)
         else:
             print("*** Unknown syntax: {}".format(line))
 
