@@ -124,6 +124,14 @@ updating attribute (save the change into the JSON file)""")
                             storage.save()
                     except Exception:
                         return
+    def default(self, line):
+        """Handles commands that are not defined"""
+        argsList = line.split('.', 1)
+        if argsList[0] in HBNBCommand.className.keys():
+            if argsList[1].strip('()') == 'all':
+                self.do_all(argsList[0])
+        else:
+            print("*** Unknown syntax: {}".format(line))
 
     def emptyline(self):
         """Go to next line and print prompt when enter pressed"""
