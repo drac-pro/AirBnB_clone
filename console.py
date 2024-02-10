@@ -128,14 +128,26 @@ updating attribute (save the change into the JSON file)""")
         """Handles commands that are not defined"""
         argsList = line.split('.', 1)
         if argsList[0] in HBNBCommand.className.keys():
-            if argsList[1].strip('()') == 'all':
+            if argsList[1] == 'all()':
                 self.do_all(argsList[0])
+            if argsList[1] == 'count()':
+                HBNBCommand.count_objs(argsList[0])
         else:
             print("*** Unknown syntax: {}".format(line))
 
     def emptyline(self):
         """Go to next line and print prompt when enter pressed"""
         pass
+
+    @staticmethod
+    def count_objs(class_name):
+        """count the number of instances of a class"""
+        count = 0
+        all_objs = storage.all()
+        for key in all_objs.keys():
+            if key.startswith(class_name + '.'):
+                count += 1;
+        print(count)
 
 
 if __name__ == "__main__":
