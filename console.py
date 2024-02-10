@@ -129,9 +129,9 @@ updating attribute (save the change into the JSON file)""")
         """Handles commands that are not defined"""
         argsList = line.split('.', 1)
         if argsList[0] in HBNBCommand.className.keys():
-            if argsList[1].strip('()') == 'all':
+            if argsList[1] == 'all()':
                 self.do_all(argsList[0])
-            elif argsList[1].strip('()') == 'count':
+            elif argsList[1] == 'count()':
                 all_objs = storage.all()
                 count = sum(
                         1 for obj in all_objs.values()
