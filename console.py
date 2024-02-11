@@ -103,9 +103,7 @@ updating attribute (save the change into the JSON file)""")
         if not args:
             print("** class name missing **")
         else:
-            print(args)
             argsList = shlex.split(args)
-            print(argsList)
             argsList_len = len(argsList)
             if argsList[0] not in HBNBCommand.className.keys():
                 print("** class doesn't exist **")
@@ -150,7 +148,6 @@ updating attribute (save the change into the JSON file)""")
                                 split(', ', 1)[0])
                         attr_dict = (ast.literal_eval(argsList[1].split('(')[1]
                                      .strip(')').split(', ', 1)[1]))
-                        print(attr_dict)
                         for key, value in attr_dict.items():
                             self.do_update(arg0 + ' ' + arg1 + ' ' + key +
                                            ' ' + str(value))
