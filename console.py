@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 import cmd
+import ast
+import shlex
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -101,7 +103,7 @@ updating attribute (save the change into the JSON file)""")
         if not args:
             print("** class name missing **")
         else:
-            argsList = args.split()
+            argsList = shlex.split(args)
             argsList_len = len(argsList)
             if argsList[0] not in HBNBCommand.className.keys():
                 print("** class doesn't exist **")
@@ -118,16 +120,60 @@ updating attribute (save the change into the JSON file)""")
                 else:
                     obj = storage.all()[key]
                     try:
-                        value = eval(argsList[3])
-                        if type(value) in (str, int, float):
-                            setattr(obj, argsList[2], value)
-                            storage.save()
-                    except Exception:
+                        if argsList[3].isdigit():
+                            argsList[3] = int(argsList[3])
+                        elif argsList[3].replace('.', '', 1).isdigit():
+                            argsList[3] = float(argsList[3])
+                    except AttributeError:
+                        pass
+                    setattr(obj, argsList[2], argsList[3])
+                    obj.save()
+
+    def default(self, line):
+        """Handles commands that are not defined"""
+        argsList = line.split('.', 1)
+        if argsList[0] in HBNBCommand.className.keys():
+            if argsList[1] == 'all()':
+                self.do_all(argsList[0])
+            elif argsList[1] == 'count()':
+                HBNBCommand.count_objs(argsList[0])
+            elif argsList[1].split('(')[0] == 'show':
+                key = argsList[0]+' '+argsList[1].split('("')[1].strip('")')
+                self.do_show(key)
+            elif argsList[1].split('(')[0] == 'update':
+                arg0 = argsList[0]
+                if ', ' in argsList[1]:
+                    if '{' in argsList[1] and ':' in argsList[1]:
+                        arg1 = (argsList[1].split('(')[1].strip(')').
+                                split(', ', 1)[0])
+                        attr_dict = (ast.literal_eval(argsList[1].split('(')[1]
+                                     .strip(')').split(', ', 1)[1]))
+                        for key, value in attr_dict.items():
+                            self.do_update(arg0 + ' ' + arg1 + ' ' + key +
+                                           ' ' + str(value))
                         return
+                    temp = argsList[1].split('(')[1].strip(')').split(', ')
+                    if len(temp) == 3:
+                        arg1 = temp[0]
+                        arg2 = temp[1]
+                        arg3 = temp[2]
+                        self.do_update(arg0+' '+arg1+' '+arg2+' '+arg3)
+        else:
+            cmd.Cmd.default(self, line)
 
     def emptyline(self):
         """Go to next line and print prompt when enter pressed"""
         pass
+
+    @staticmethod
+    def count_objs(class_name):
+        """count the number of instances of a class"""
+        count = 0
+        all_objs = storage.all()
+        for key in all_objs.keys():
+            if key.startswith(class_name + '.'):
+                count += 1
+        print(count)
 
 
 if __name__ == "__main__":
