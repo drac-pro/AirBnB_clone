@@ -140,6 +140,10 @@ updating attribute (save the change into the JSON file)""")
             elif argsList[1].split('(')[0] == 'show':
                 key = argsList[0]+' '+argsList[1].split('("')[1].strip('")')
                 self.do_show(key)
+            elif argsList[1].startswith(
+                    'destroy(') and argsList[1].endswith(')'):
+                arg = argsList[0]+' '+argsList[1].split('("')[1].strip('")')
+                self.do_destroy(arg)
             elif argsList[1].split('(')[0] == 'update':
                 arg0 = argsList[0]
                 if ', ' in argsList[1]:
