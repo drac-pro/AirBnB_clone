@@ -137,6 +137,10 @@ updating attribute (save the change into the JSON file)""")
                         1 for obj in all_objs.values()
                         if obj.__class__.__name__ == argsList[0])
                 print(count)
+            elif argsList[1].startswith(
+                    'destroy(') and argsList[1].endswith(')'):
+                key = argsList[0]+' '+argsList[1].split('("')[1].strip('")')
+                self.do_destroy(key)
         else:
             print("*** Unknown syntax: {}".format(line))
 
