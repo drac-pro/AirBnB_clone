@@ -7,8 +7,7 @@ from console import HBNBCommand
 
 
 class TestHBNBCommandDocs(unittest.TestCase):
-    """Tests for HBNBCommand documentation
-    """
+    """Tests for HBNBCommand documentation"""
 
     def test_console_conforms_pep8(self):
         """Test if console.py conforms to PEP8 guidelines.
