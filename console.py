@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Creates a simple console"""
+
 import cmd
 import ast
 import shlex
@@ -10,7 +12,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-"""Creates a simple console"""
 
 
 class HBNBCommand(cmd.Cmd):
@@ -37,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             obj = HBNBCommand.className[args]()
-            obj.save()
+            storage.save()
             print(obj.id)
 
     def do_show(self, args):

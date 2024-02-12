@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Defines a file storage class that serializes instances to a JSON file
+and deserializes a JSON file to instances"""
+
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -7,8 +10,6 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 import json
-"""Defines a file storage class that serializes instances to a JSON file
-and deserializes a JSON file to instances"""
 
 
 class FileStorage:
